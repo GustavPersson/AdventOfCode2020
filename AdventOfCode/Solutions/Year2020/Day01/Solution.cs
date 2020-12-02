@@ -11,7 +11,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         int[] Expenses;
 
-        public Day01() : base(01, 2020, "")
+        public Day01() : base(01, 2020, "Report Repair")
         {
             Expenses = Input.ToIntArray("\n").Where(e => e < 2020).ToArray();
         }
