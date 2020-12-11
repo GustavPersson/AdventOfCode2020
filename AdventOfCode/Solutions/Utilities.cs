@@ -36,7 +36,7 @@ namespace AdventOfCode.Solutions
         public static void WriteLine(object str)
         {
             Console.WriteLine(str);
-            Trace.WriteLine(str);
+            // Trace.WriteLine(str);
         }
 
         public static int MinOfMany(params int[] items)
@@ -135,5 +135,19 @@ namespace AdventOfCode.Solutions
         }
 
         public static (int, int) Add(this (int x, int y) a, (int x, int y) b) => (a.x + b.x, a.y + b.y);
+
+
+        public static T[] GetRow<T>(this T[,] array, int row)
+        {
+            return Enumerable.Range(0, array.GetLength(1))
+                    .Select(x => array[row, x])
+                    .ToArray();
+        }
+        public static T[] GetColumn<T>(this T[,] array, int column)
+        {
+            return Enumerable.Range(0, array.GetLength(0))
+                    .Select(x => array[x, column])
+                    .ToArray();
+        }
     }
 }
