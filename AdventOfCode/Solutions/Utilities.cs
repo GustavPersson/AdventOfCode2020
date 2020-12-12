@@ -149,5 +149,48 @@ namespace AdventOfCode.Solutions
                     .Select(x => array[x, column])
                     .ToArray();
         }
+
+        public enum CompassDirection
+        {
+            N = 0,
+            NE = 45,
+            E = 90,
+            SE = 135,
+            S = 180,
+            SW = 225,
+            W = 270,
+            NW = 315
+        }
+        public static (int x, int y) MoveDirection(this (int, int) start, CompassDirection Direction, int distance = 1)
+        {
+            return (Direction) switch
+            {
+                CompassDirection.N => start.Add((0, distance)),
+                CompassDirection.NE => start.Add((distance, distance)),
+                CompassDirection.E => start.Add((distance, 0)),
+                CompassDirection.SE => start.Add((distance, -distance)),
+                CompassDirection.S => start.Add((0, -distance)),
+                CompassDirection.SW => start.Add((-distance, -distance)),
+                CompassDirection.W => start.Add((-distance, 0)),
+                CompassDirection.NW => start.Add((-distance, distance)),
+                _ => throw new ArgumentException("Direction is not valid", nameof(Direction))
+            };
+        }
+
+        public static CompassDirection GetNewDirection(string CurrentDirection, int degrees, string direction)
+        {
+            int curDirection = (int)Enum.Parse(typeof(CompassDirection), CurrentDirection);
+
+            CompassDirection resultingDirection;
+
+            switch (direction)
+            {
+                case "L": resultingDirection = (CompassDirection)(((int)curDirection - degrees + 360) % 360); break;
+                case "R": resultingDirection = (CompassDirection)(((int)curDirection + degrees) % 360); break;
+                default: resultingDirection = CompassDirection.E; break;
+            }
+
+            return resultingDirection;
+        }
     }
 }
