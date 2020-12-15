@@ -11,6 +11,8 @@ namespace AdventOfCode.Solutions
 
         Lazy<string> _input, _part1, _part2;
 
+        string Part1Timing, Part2Timing;
+
         public int Day { get; }
         public int Year { get; }
         public string Title { get; }
@@ -25,49 +27,78 @@ namespace AdventOfCode.Solutions
             Year = year;
             Title = title;
             _input = new Lazy<string>(() => LoadInput());
-            _part1 = new Lazy<string>(() => SolvePartOne());
-            _part2 = new Lazy<string>(() => SolvePartTwo());
+            _part1 = new Lazy<string>(() =>
+            {
+                var watch = new System.Diagnostics.Stopwatch();
+
+                watch.Start();
+
+                string response = SolvePartOne();
+                watch.Stop();
+
+                Part1Timing = $"Execution Time Part 1: {watch.ElapsedMilliseconds} ms\n";
+
+                return response;
+            });
+            _part2 = new Lazy<string>(() =>
+            {
+                var watch = new System.Diagnostics.Stopwatch();
+
+                watch.Start();
+
+                string response = SolvePartTwo();
+                watch.Stop();
+
+                Part2Timing = $"Execution Time Part 2: {watch.ElapsedMilliseconds} ms\n";
+
+                return response;
+
+            });
         }
 
         public void Solve(int part = 0)
         {
-            if(Input == null) return;
+
+            if (Input == null) return;
 
             bool doOutput = false;
             string output = $"--- Day {Day}: {Title} --- \n";
-            if(DebugInput != null)
+            if (DebugInput != null)
             {
                 output += $"!!! DebugInput used: {DebugInput}\n";
             }
 
-            if(part != 2)
+            if (part != 2)
             {
-                if(Part1 != "")
+                if (Part1 != "")
                 {
                     output += $"Part 1: {Part1}\n";
+                    output += Part1Timing;
                     doOutput = true;
                 }
                 else
                 {
                     output += "Part 1: Unsolved\n";
-                    if(part == 1) doOutput = true;
+                    if (part == 1) doOutput = true;
                 }
             }
-            if(part != 1)
+            if (part != 1)
             {
-                if(Part2 != "")
+                if (Part2 != "")
                 {
                     output += $"Part 2: {Part2}\n";
+                    output += Part2Timing;
                     doOutput = true;
                 }
                 else
                 {
                     output += "Part 2: Unsolved\n";
-                    if(part == 2) doOutput = true;
+                    if (part == 2) doOutput = true;
                 }
             }
 
-            if(doOutput) Console.WriteLine(output);
+
+            if (doOutput) Console.WriteLine(output);
         }
 
         string LoadInput()
@@ -76,7 +107,7 @@ namespace AdventOfCode.Solutions
             string INPUT_URL = $"https://adventofcode.com/{Year}/day/{Day}/input";
             string input = "";
 
-            if(File.Exists(INPUT_FILEPATH) && new FileInfo(INPUT_FILEPATH).Length > 0)
+            if (File.Exists(INPUT_FILEPATH) && new FileInfo(INPUT_FILEPATH).Length > 0)
             {
                 input = File.ReadAllText(INPUT_FILEPATH);
             }
@@ -85,23 +116,23 @@ namespace AdventOfCode.Solutions
                 try
                 {
                     DateTime CURRENT_EST = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.Utc).AddHours(-5);
-                    if(CURRENT_EST < new DateTime(Year, 12, Day)) throw new InvalidOperationException();
+                    if (CURRENT_EST < new DateTime(Year, 12, Day)) throw new InvalidOperationException();
 
-                    using(var client = new WebClient())
+                    using (var client = new WebClient())
                     {
                         client.Headers.Add(HttpRequestHeader.Cookie, Program.Config.Cookie);
                         input = client.DownloadString(INPUT_URL).Trim();
                         File.WriteAllText(INPUT_FILEPATH, input);
                     }
                 }
-                catch(WebException e)
+                catch (WebException e)
                 {
                     var statusCode = ((HttpWebResponse)e.Response).StatusCode;
-                    if(statusCode == HttpStatusCode.BadRequest)
+                    if (statusCode == HttpStatusCode.BadRequest)
                     {
                         Console.WriteLine($"Day {Day}: Error code 400 when attempting to retrieve puzzle input through the web client. Your session cookie is probably not recognized.");
                     }
-                    else if(statusCode == HttpStatusCode.NotFound)
+                    else if (statusCode == HttpStatusCode.NotFound)
                     {
                         Console.WriteLine($"Day {Day}: Error code 404 when attempting to retrieve puzzle input through the web client. The puzzle is probably not available yet.");
                     }
@@ -110,7 +141,7 @@ namespace AdventOfCode.Solutions
                         Console.WriteLine(e.ToString());
                     }
                 }
-                catch(InvalidOperationException)
+                catch (InvalidOperationException)
                 {
                     Console.WriteLine($"Day {Day}: Cannot fetch puzzle input before given date (Eastern Standard Time).");
                 }
