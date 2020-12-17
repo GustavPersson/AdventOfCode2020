@@ -25,7 +25,7 @@ namespace AdventOfCode.Solutions.Year2020
             {
                 Type = item.Substring(0, 1),
                 Value = Int32.Parse(item.Substring(1))
-            }).ToList(); ;
+            }).ToList();
 
         }
 
