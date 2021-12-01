@@ -180,6 +180,7 @@ namespace AdventOfCode.Solutions
             W = 270,
             NW = 315
         }
+
         public static (int x, int y) MoveDirection(this (int, int) start, CompassDirection Direction, int distance = 1)
         {
             return (Direction) switch
