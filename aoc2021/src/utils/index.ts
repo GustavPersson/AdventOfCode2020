@@ -29,3 +29,24 @@
  *     import { myUtil } from '../utils'
  *
  */
+
+export function getLines(rawInput: string): string[] {
+  return rawInput
+    .split(/\n/)
+    .map((l) => l.trim())
+    .filter((l) => l);
+}
+
+export function getLineGroups(rawInput: string): string[][] {
+  const parts: string[][] = [[]];
+
+  for (const line of rawInput.split(/\n/)) {
+    if (!line.trim().length) {
+      parts.push([]);
+    } else {
+      parts[parts.length - 1].push(line);
+    }
+  }
+
+  return parts.filter((part) => part.length > 0);
+}

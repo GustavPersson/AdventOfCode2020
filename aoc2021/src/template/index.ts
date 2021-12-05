@@ -1,5 +1,8 @@
 import run from "aocrunner";
 import _ from 'lodash';
+import log from 'loglevel';
+
+log.enableAll()
 
 
 const parseInput = (rawInput: string) => rawInput;
