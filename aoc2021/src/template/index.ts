@@ -1,11 +1,12 @@
 import run from "aocrunner";
-import _ from 'lodash';
-import log from 'loglevel';
+import _ from "lodash";
+import log from "loglevel";
 
-log.enableAll()
+import { getLines } from "../utils/index.js";
 
+log.enableAll();
 
-const parseInput = (rawInput: string) => rawInput;
+const parseInput = (rawInput: string) => getLines(rawInput);
 
 const part1 = (rawInput: string) => {
   const input = parseInput(rawInput);
