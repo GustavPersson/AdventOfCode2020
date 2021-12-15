@@ -187,10 +187,10 @@
         "time": 30.47
       },
       "part2": {
-        "solved": false,
-        "result": null,
+        "solved": true,
+        "result": "HZLEHJRK",
         "attempts": [],
-        "time": null
+        "time": 26.23
       }
     },
     {
@@ -212,13 +212,13 @@
         "solved": true,
         "result": "602",
         "attempts": [],
-        "time": 55.92
+        "time": 58.54
       },
       "part2": {
         "solved": true,
         "result": "2935",
         "attempts": [],
-        "time": 2424.75
+        "time": 2346.42
       }
     },
     {
