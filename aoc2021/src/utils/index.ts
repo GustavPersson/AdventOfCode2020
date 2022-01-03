@@ -29,6 +29,7 @@
  *     import { myUtil } from '../utils'
  *
  */
+export const TWO_PI = Math.PI * 2;
 
 export function getLines(rawInput: string): string[] {
   return rawInput
@@ -49,4 +50,9 @@ export function getLineGroups(rawInput: string): string[][] {
   }
 
   return parts.filter((part) => part.length > 0);
+}
+
+export function wrapRotation(angle: number): number {
+  while (angle < 0) angle += TWO_PI;
+  return angle % TWO_PI;
 }
