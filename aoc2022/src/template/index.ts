@@ -2,7 +2,7 @@ import run from "aocrunner";
 import _ from "lodash";
 import log from "loglevel";
 
-import { Solution } from "../types";
+import type { Solution } from "../types.js";
 import { getLines } from "../utils/index.js";
 
 log.enableAll();

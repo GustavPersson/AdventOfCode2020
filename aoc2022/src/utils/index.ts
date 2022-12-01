@@ -51,6 +51,20 @@
  
    return parts.filter((part) => part.length > 0);
  }
+
+ export function getLineGroupsAsNumbers(rawInput: string): number[][] {
+   const parts: number[][] = [[]];
+ 
+   for (const line of rawInput.split(/\n/)) {
+     if (!line.trim().length) {
+       parts.push([]);
+     } else {
+       parts[parts.length - 1].push(parseInt(line, 10));
+     }
+   }
+ 
+   return parts.filter((part) => part.length > 0);
+ }
  
  export function wrapRotation(angle: number): number {
    while (angle < 0) angle += TWO_PI;
