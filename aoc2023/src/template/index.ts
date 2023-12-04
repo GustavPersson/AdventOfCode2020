@@ -1,8 +1,8 @@
-import run from "aocrunner";
-import _ from "lodash";
-import log from "loglevel";
+import run from 'aocrunner';
+import _ from 'lodash';
+import log from 'loglevel';
 
-import { getLines } from "../utils/index.js";
+import { getLines } from '../utils/index.js';
 
 log.enableAll();
 

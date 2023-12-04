@@ -30,36 +30,36 @@
  *
  */
 export function getLines(rawInput: string): string[] {
-    return rawInput
-      .split(/\n/)
-      .map((l) => l.trim())
-      .filter((l) => l);
-  }
-  
-  export function getLineGroups(rawInput: string): string[][] {
-    const parts: string[][] = [[]];
-  
-    for (const line of rawInput.split(/\n/)) {
-      if (!line.trim().length) {
-        parts.push([]);
-      } else {
-        parts[parts.length - 1].push(line);
-      }
+  return rawInput
+    .split(/\n/)
+    .map((l) => l.trim())
+    .filter((l) => l);
+}
+
+export function getLineGroups(rawInput: string): string[][] {
+  const parts: string[][] = [[]];
+
+  for (const line of rawInput.split(/\n/)) {
+    if (!line.trim().length) {
+      parts.push([]);
+    } else {
+      parts[parts.length - 1].push(line);
     }
-  
-    return parts.filter((part) => part.length > 0);
   }
- 
-  export function getLineGroupsAsNumbers(rawInput: string): number[][] {
-    const parts: number[][] = [[]];
-  
-    for (const line of rawInput.split(/\n/)) {
-      if (!line.trim().length) {
-        parts.push([]);
-      } else {
-        parts[parts.length - 1].push(parseInt(line, 10));
-      }
+
+  return parts.filter((part) => part.length > 0);
+}
+
+export function getLineGroupsAsNumbers(rawInput: string): number[][] {
+  const parts: number[][] = [[]];
+
+  for (const line of rawInput.split(/\n/)) {
+    if (!line.trim().length) {
+      parts.push([]);
+    } else {
+      parts[parts.length - 1].push(parseInt(line, 10));
     }
-  
-    return parts.filter((part) => part.length > 0);
   }
+
+  return parts.filter((part) => part.length > 0);
+}
