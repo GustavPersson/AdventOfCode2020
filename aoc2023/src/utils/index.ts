@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 /**
  * Root for your util libraries.
  *
@@ -63,3 +65,9 @@ export function getLineGroupsAsNumbers(rawInput: string): number[][] {
 
   return parts.filter((part) => part.length > 0);
 }
+
+export const parseNumbers = (str: string) =>
+  str
+    .split(' ')
+    .filter((x) => x !== '')
+    .map((x) => parseInt(x));
