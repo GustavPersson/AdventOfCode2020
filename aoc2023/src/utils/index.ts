@@ -52,6 +52,14 @@ export function getLineGroups(rawInput: string): string[][] {
   return parts.filter((part) => part.length > 0);
 }
 
+export function getLinesAsGrid(rawInput: string): string[][] {
+  return getLines(rawInput).map((line) => line.split(''));
+}
+
+export function getLinesAsGridOfNumbers(rawInput: string): number[][] {
+  return getLines(rawInput).map((line) => line.split('').map(Number));
+}
+
 export function getLineGroupsAsNumbers(rawInput: string): number[][] {
   const parts: number[][] = [[]];
 
