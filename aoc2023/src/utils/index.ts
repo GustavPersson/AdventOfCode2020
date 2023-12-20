@@ -172,3 +172,14 @@ export const lowestCommonMultiple = (nums: number[]): number => {
 
   return nums.reduce(binaryLCM);
 };
+
+export const rotateGrid = <T>(source: T[][]) => {
+  let result: T[][] = [];
+  source.forEach((a, i, aa) =>
+    a.forEach((b, j, bb) => {
+      result[bb.length - j - 1] = result[bb.length - j - 1] || [];
+      result[bb.length - j - 1][i] = b;
+    }),
+  );
+  return result;
+};
